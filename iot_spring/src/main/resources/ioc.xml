@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="ex" class="com.iot.spring.Excute">
+		<constructor-arg ref="developer"></constructor-arg>
+		<property name="worker">
+			<ref bean="designer"/>
+		</property> 
+	</bean>
+
+	<bean id="designer" class="com.iot.spring.dev.Designer">
+	
+	</bean>
+	<bean id="developer" class="com.iot.spring.dev.Developer">
+	
+	</bean>
+</beans>
