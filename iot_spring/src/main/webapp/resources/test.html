@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="/spring/resources/js/jquery-3.2.1.js"></script>
+<script>
+var gObj;
+$(document).ready(function(){
+	gObj = new gridObj("testDiv");
+	gObj.setColumns(['이름','나이']);
+	
+	$.ajax({
+		url : "/spring/h2",
+		success : function(res){
+			gObj.load(res);
+			gObj.init();
+		},
+		error : function(xhr){
+			alert(2);
+			alert(xhr.responseText);
+		}
+		
+	})
+});
+
+var gridObj = function(id){
+	var obj = document.getElementById(id);
+	var htmlStr = "";
+	var colsStr = "";
+	var dataStr = "";
+	
+	if(!obj){
+		alert("id 확인해 봐봐!!");
+	}
+	this.setColumns = function(columns){
+		for(var i=0; i<columns.length;i++){
+			colsStr += "<th>" + columns[i] +"</th>";
+		}
+	}
+	this.load = function(json){
+		//json = JSON.parse(json);
+		for(var i=0; i<json.length;i++){
+			var datas = json[i];
+			dataStr += "<tr>";
+			dataStr += "<td>" + datas.name + "</td>";
+			dataStr += "<td>" + datas.age + "</td>";
+			dataStr += "</tr>";
+		}
+	}
+	this.init = function(){
+		htmlStr += "<table border=1>";
+		htmlStr += "<tr>";
+		htmlStr += colsStr;
+		htmlStr +="</tr>";
+		htmlStr += dataStr;
+		htmlStr +="</table>";
+		obj.insertAdjacentHTML('afterbegin',htmlStr);
+	}
+	
+}
+
+/*  function init(){
+
+	 var list = [];
+	for(var i=1;i<=3;i++){
+		var datas = {};
+		datas["num"] = i;
+		datas["name"] = "이름"+i;
+		datas["address"] = "주소"+i;
+		list.push(datas);	
+	} 
+
+}  */
+</script>
+<body>
+<div id="testDiv"></div>
+</body>
+</html>
