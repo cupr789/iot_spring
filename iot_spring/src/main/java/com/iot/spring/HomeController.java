@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,6 +52,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/h2", method = RequestMethod.GET)
 	public @ResponseBody List<User> home2() {
+		System.out.println("asdasdasfafasfs");
 		User user= new User();
 		user.setName("홍길동");
 		user.setAge(30);
@@ -58,9 +60,7 @@ public class HomeController {
 		list.add(user);
 		list.add(user);
 		list.add(user);
-		list.add(user);
-		list.add(user);
-		list.add(user);
+	
 		return list;
 	}
 	
